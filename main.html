@@ -8,19 +8,19 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      padding: 50px;
-      background-color: #f4f4f4;
+      padding: 60px;
+      background-color: #f2f2f2;
     }
 
     /* Open Modal Button */
     #openModal {
       background-color: #3498db;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 6px;
+      color: #fff;
+      padding: 12px 25px;
       text-decoration: none;
-      font-size: 16px;
-      transition: 0.3s;
+      border-radius: 6px;
+      font-size: 18px;
+      transition: background-color 0.3s ease;
     }
 
     #openModal:hover {
@@ -35,29 +35,40 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background-color: rgba(0, 0, 0, 0.5);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
-      z-index: 10;
     }
 
-    /* Show modal when URL hash matches the ID */
+    /* When targeted (clicked via link), show modal */
     .modal:target {
       display: block;
       opacity: 1;
       pointer-events: auto;
     }
 
-    /* Modal box */
+    /* Invisible full-screen link to close when clicked outside content */
+    .modal:target .modal-overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      content: "";
+    }
+
+    /* Modal Box */
     .modal-content {
-      background: #fff;
+      background-color: #fff;
       width: 40%;
+      max-width: 500px;
       margin: 10% auto;
       border-radius: 10px;
       overflow: hidden;
+      position: relative;
+      z-index: 2;
       animation: slideDown 0.3s ease;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.3);
     }
 
     .modal-header {
@@ -76,38 +87,41 @@
 
     .close-modal {
       color: white;
-      font-size: 24px;
-      text-decoration: none;
+      font-size: 26px;
       font-weight: bold;
+      text-decoration: none;
       line-height: 1;
     }
 
     .close-modal:hover {
-      color: #e0e0e0;
+      color: #ddd;
     }
 
     .modal-body {
       padding: 20px;
       color: #333;
+      font-size: 16px;
     }
 
     @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
+      from { transform: translateY(-30px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Button to open modal -->
+  <!-- Open Modal Button -->
   <a href="#myModal" id="openModal">Open Modal</a>
 
-  <!-- Modal Structure -->
+  <!-- Modal -->
   <div id="myModal" class="modal">
+    <!-- Invisible overlay (clicking outside modal closes it) -->
+    <a href="#" class="modal-overlay"></a>
+
     <div class="modal-content">
       <div class="modal-header">
         <h2>Modal Header</h2>
-        <!-- Close button -->
         <a href="#" class="close-modal">&times;</a>
       </div>
       <div class="modal-body">
